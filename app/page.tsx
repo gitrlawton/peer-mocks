@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code2, Users, Calendar, MessageSquare } from "lucide-react";
@@ -12,8 +13,12 @@ export default function Home() {
             <span className="font-semibold text-xl">MockInterview</span>
           </div>
           <div className="flex gap-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button>Get Started</Button>
+            <Link href="/signin">
+              <Button variant="ghost">Sign In</Button>
+            </Link>
+            <Link href="/profile">
+              <Button>Get Started</Button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -28,7 +33,9 @@ export default function Home() {
             and behavioral questions. Get real feedback and improve your skills.
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg">Find a Practice Partner</Button>
+            <Link href="/profile">
+              <Button size="lg">Find a Practice Partner</Button>
+            </Link>
             <Button size="lg" variant="outline">Learn More</Button>
           </div>
         </div>
@@ -83,7 +90,9 @@ export default function Home() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button size="lg" variant="secondary">Create Your Profile</Button>
+            <Link href="/profile">
+              <Button size="lg" variant="secondary">Create Your Profile</Button>
+            </Link>
           </CardContent>
         </Card>
       </main>

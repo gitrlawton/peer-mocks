@@ -16,7 +16,7 @@ export default function Home() {
             <Link href="/signin">
               <Button variant="ghost">Sign In</Button>
             </Link>
-            <Link href="/profile">
+            <Link href="/dashboard">
               <Button>Get Started</Button>
             </Link>
           </div>
@@ -33,7 +33,7 @@ export default function Home() {
             and behavioral questions. Get real feedback and improve your skills.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/profile">
+            <Link href="/dashboard">
               <Button size="lg">Find a Practice Partner</Button>
             </Link>
             <Button size="lg" variant="outline">Learn More</Button>
@@ -90,7 +90,7 @@ export default function Home() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/profile">
+            <Link href="/dashboard">
               <Button size="lg" variant="secondary">Create Your Profile</Button>
             </Link>
           </CardContent>

@@ -31,7 +31,7 @@ export default function SignIn() {
     setIsLoading(true);
 
     setTimeout(() => {
-      router.push("/");
+      router.push("/dashboard");
     }, 800);
   };
 
@@ -97,7 +97,7 @@ export default function SignIn() {
               </Button>
               <div className="text-center text-sm text-slate-600">
                 Don&apos;t have an account?{" "}
-                <Link href="/profile" className="text-slate-900 font-medium hover:underline">
+                <Link href="/dashboard" className="text-slate-900 font-medium hover:underline">
                   Create one
                 </Link>
               </div>

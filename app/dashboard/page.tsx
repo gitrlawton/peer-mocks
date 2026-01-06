@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, Users, Calendar, Clock, MessageSquare, Star, TrendingUp } from "lucide-react";
+import { Code2, Calendar, Clock, MessageSquare, Star, TrendingUp } from "lucide-react";
+import { Navigation } from "@/components/navigation";
 
 // Mock data
 const upcomingSessions = [
@@ -77,25 +77,7 @@ const stats = [
 export default function Dashboard() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <nav className="border-b bg-white">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Code2 className="h-6 w-6" />
-            <span className="font-semibold text-xl">MockInterview</span>
-          </div>
-          <div className="flex gap-4 items-center">
-            <Link href="/dashboard">
-              <Button variant="ghost">Dashboard</Button>
-            </Link>
-            <Link href="/profile">
-              <Button variant="ghost">Profile</Button>
-            </Link>
-            <div className="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-medium">
-              JD
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">

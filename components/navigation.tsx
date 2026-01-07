@@ -25,17 +25,11 @@ export function Navigation() {
   return (
     <nav className="border-b bg-white">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
           <Code2 className="h-6 w-6" />
           <span className="font-semibold text-xl">MockInterview</span>
-        </div>
+        </Link>
         <div className="flex gap-4 items-center">
-          <Link href="/dashboard">
-            <Button variant="ghost">Dashboard</Button>
-          </Link>
-          <Link href="/profile">
-            <Button variant="ghost">Profile</Button>
-          </Link>
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}

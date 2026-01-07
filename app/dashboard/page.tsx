@@ -157,7 +157,7 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-slate-900">Available Partners</h2>
-              <Button variant="ghost" size="sm">Browse All</Button>
+              <Button variant="ghost" size="sm">View All</Button>
             </div>
             <div className="space-y-4">
               {availablePartners.map((partner) => (
@@ -204,13 +204,14 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>Your latest practice sessions and feedback</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-slate-900">Recent Activity</h2>
+            <Button variant="ghost" size="sm">View All</Button>
+          </div>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4">
               <div className="flex items-start gap-4 pb-4 border-b">
                 <div className="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
                 <div className="flex-1">
@@ -239,9 +240,10 @@ export default function Dashboard() {
                   <p className="text-xs text-slate-500 mt-1">2 days ago</p>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </main>
     </div>
   );

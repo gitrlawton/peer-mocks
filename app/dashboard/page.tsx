@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code2, Calendar, Clock, MessageSquare, Star, TrendingUp } from "lucide-react";
 import { Navigation } from "@/components/navigation";
+import { PartnerProfileModal, Partner } from "@/components/partner-profile-modal";
+import { useRouter } from "next/navigation";
 
 // Mock data
 const upcomingSessions = [
@@ -37,33 +42,132 @@ const upcomingSessions = [
   }
 ];
 
-const availablePartners = [
+const availablePartners: Partner[] = [
   {
     id: 1,
     name: "Alex Thompson",
+    firstName: "Alex",
+    lastName: "Thompson",
+    title: "Senior Engineer",
     level: "Senior Engineer at Microsoft",
-    specialties: ["Algorithms", "System Design"],
+    company: "Microsoft",
+    location: "Seattle, WA",
+    timezone: "UTC-08:00 (Pacific Time)",
+    currentTime: "2:30 PM",
+    specialties: ["Algorithms", "System Design", "Cloud Architecture"],
     rating: 4.9,
     sessions: 127,
-    avatar: "AT"
+    avatar: "AT",
+    bio: "Senior engineer with 10+ years of experience at Microsoft. Passionate about helping others master algorithms and system design. Have conducted 100+ technical interviews and love sharing interview strategies.",
+    experience: "Senior Level",
+    totalHours: 190,
+    responseRate: "98%",
+    memberSince: "March 2023",
+    availability: [
+      "Monday: 6:00 PM - 9:00 PM",
+      "Wednesday: 6:00 PM - 9:00 PM",
+      "Saturday: 10:00 AM - 4:00 PM"
+    ],
+    reviews: [
+      {
+        id: 1,
+        from: "Jennifer Lee",
+        rating: 5,
+        comment: "Alex helped me understand system design patterns that were crucial for my interview. Highly recommended!",
+        date: "1 week ago"
+      },
+      {
+        id: 2,
+        from: "David Kim",
+        rating: 4.8,
+        comment: "Great session on algorithms. Alex explained complex concepts in a simple way.",
+        date: "2 weeks ago"
+      }
+    ]
   },
   {
     id: 2,
     name: "Priya Patel",
+    firstName: "Priya",
+    lastName: "Patel",
+    title: "Staff Engineer",
     level: "Staff Engineer at Stripe",
-    specialties: ["Frontend", "React"],
+    company: "Stripe",
+    location: "San Francisco, CA",
+    timezone: "UTC-08:00 (Pacific Time)",
+    currentTime: "2:30 PM",
+    specialties: ["Frontend", "React", "TypeScript", "UI/UX"],
     rating: 4.8,
     sessions: 89,
-    avatar: "PP"
+    avatar: "PP",
+    bio: "Staff engineer at Stripe specializing in frontend development. Love helping candidates prepare for frontend interviews and discussing best practices in React and TypeScript.",
+    experience: "Staff Level",
+    totalHours: 134,
+    responseRate: "95%",
+    memberSince: "June 2023",
+    availability: [
+      "Tuesday: 7:00 PM - 10:00 PM",
+      "Thursday: 7:00 PM - 10:00 PM",
+      "Sunday: 2:00 PM - 6:00 PM"
+    ],
+    reviews: [
+      {
+        id: 1,
+        from: "Michael Chang",
+        rating: 5,
+        comment: "Priya's feedback on my React code was incredibly valuable. She helped me identify performance issues I didn't know existed.",
+        date: "3 days ago"
+      },
+      {
+        id: 2,
+        from: "Lisa Anderson",
+        rating: 4.5,
+        comment: "Great session on TypeScript patterns. Very knowledgeable and patient.",
+        date: "1 week ago"
+      }
+    ]
   },
   {
     id: 3,
     name: "James Wilson",
+    firstName: "James",
+    lastName: "Wilson",
+    title: "Engineering Manager",
     level: "Engineering Manager at Netflix",
-    specialties: ["Leadership", "Behavioral"],
+    company: "Netflix",
+    location: "Los Angeles, CA",
+    timezone: "UTC-08:00 (Pacific Time)",
+    currentTime: "2:30 PM",
+    specialties: ["Leadership", "Behavioral", "System Design", "Team Management"],
     rating: 5.0,
     sessions: 156,
-    avatar: "JW"
+    avatar: "JW",
+    bio: "Engineering manager at Netflix with experience leading teams of 15+ engineers. Specialized in behavioral interviews and helping engineers transition to leadership roles.",
+    experience: "Staff Level",
+    totalHours: 234,
+    responseRate: "99%",
+    memberSince: "January 2023",
+    availability: [
+      "Monday: 5:00 PM - 8:00 PM",
+      "Friday: 6:00 PM - 9:00 PM",
+      "Saturday: 9:00 AM - 12:00 PM"
+    ],
+    reviews: [
+      {
+        id: 1,
+        from: "Rachel Green",
+        rating: 5,
+        comment: "James provided excellent guidance on behavioral questions. His experience as a manager really shows.",
+        date: "2 days ago"
+      },
+      {
+        id: 2,
+        from: "Tom Bradford",
+        rating: 5,
+        comment: "Best behavioral interview practice I've had. James asked thoughtful questions and gave actionable feedback.",
+        date: "1 week ago"
+      }
+    ]
   }
 ];
 
@@ -75,9 +179,32 @@ const stats = [
 ];
 
 export default function Dashboard() {
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+
+  const handlePartnerClick = (partner: Partner) => {
+    setSelectedPartner(partner);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedPartner(null), 300);
+  };
+
+  const handleViewAllPartners = () => {
+    router.push('/partners');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Navigation />
+      <PartnerProfileModal
+        partner={selectedPartner}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
 
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -157,11 +284,11 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-slate-900">Available Partners</h2>
-              <Button variant="ghost" size="sm">View All</Button>
+              <Button variant="ghost" size="sm" onClick={handleViewAllPartners}>View All</Button>
             </div>
             <div className="space-y-4">
               {availablePartners.map((partner) => (
-                <Card key={partner.id} className="hover:shadow-md transition-shadow">
+                <Card key={partner.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handlePartnerClick(partner)}>
                   <CardContent className="pt-6">
                     <div className="flex gap-4">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 text-white flex items-center justify-center font-semibold flex-shrink-0">
@@ -171,7 +298,7 @@ export default function Dashboard() {
                         <h3 className="font-semibold text-slate-900 mb-1">{partner.name}</h3>
                         <p className="text-sm text-slate-600 mb-2">{partner.level}</p>
                         <div className="flex flex-wrap gap-2 mb-2">
-                          {partner.specialties.map((specialty, idx) => (
+                          {partner.specialties.slice(0, 2).map((specialty, idx) => (
                             <span
                               key={idx}
                               className="text-xs px-2 py-1 bg-slate-100 text-slate-700 rounded"
@@ -188,7 +315,7 @@ export default function Dashboard() {
                           <span>{partner.sessions} sessions</span>
                         </div>
                       </div>
-                      <div className="flex flex-col gap-2 self-start">
+                      <div className="flex flex-col gap-2 self-start" onClick={(e) => e.stopPropagation()}>
                         <Button size="sm">Request</Button>
                         <Button size="sm" variant="outline">
                           <MessageSquare className="h-3.5 w-3.5 mr-1" />
